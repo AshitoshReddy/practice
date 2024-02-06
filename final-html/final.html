@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock-Paper-Scissors</title>
+    <style></style>
+  </head>
+  <body>
+    <button onclick="playGame('ROCK');">Rock</button>
+    <button onclick="playGame('PAPER');">Paper</button>
+    <button onclick="playGame('SCISSORS');">Scissors</button>
+    <button
+      onclick="
+    score.wins = 0;
+    score.losses = 0;
+    score.ties =0;"
+    >
+      Reset Score
+    </button>
+    <script>
+      let score = {
+        wins: 0,
+        looses: 0,
+        ties: 0,
+      };
+      function playGame(playerMove) {
+        let computerMove = pickComputerMove();
+
+        let result = "";
+        if (playerMove === "SCISSORS") {
+          if (computerMove === "ROCK") {
+            result = "YOU LOOSE";
+          } else if (computerMove === "SCISSORS") {
+            result = "TIE";
+          } else if (computerMove === "PAPER") {
+            result = "YOU WIN";
+          }
+        } else if (playerMove === "PAPER") {
+          if (computerMove === "Rock") {
+            result = "YOU WIN";
+          } else if (computerMove === "SCISSORS") {
+            result = "YOU LOOSE";
+          } else if (computerMove === "PAPER") {
+            result = "TIE";
+          }
+        } else if (playerMove === "ROCK") {
+          if (computerMove === "ROCK") {
+            result = "TIE";
+          } else if (computerMove === "SCISSORS") {
+            result = "YOU WIN";
+          } else if (computerMove === "PAPER") {
+            result = "YOU LOOSE";
+          }
+        }
+        if (result === "YOU WIN") {
+          score.wins += 1;
+        } else if (result === "YOU LOOSE") {
+          score.looses += 1;
+        } else if (result === "TIE") {
+          score.ties += 1;
+        }
+        alert(
+          `YOU CHOOSE ${playerMove} COMPUTER CHOOSE ${computerMove} THE RESULT IS ${result}
+          WINS ${score.wins} LOOSES ${score.looses} TIES ${score.ties}`
+        );
+      }
+
+      function pickComputerMove() {
+        let randomMove = Math.random();
+
+        let computerMove = "";
+
+        if (randomMove >= 0 && randomMove < 1 / 3) {
+          computerMove = "ROCK";
+        } else if (randomMove >= 1 / 3 && randomMove < 2 / 3) {
+          computerMove = "SCISSORS";
+        } else if (randomMove >= 2 / 3 && randomMove < 1) {
+          computerMove = "PAPER";
+        }
+        return computerMove;
+      }
+    </script>
+  </body>
+</html>
